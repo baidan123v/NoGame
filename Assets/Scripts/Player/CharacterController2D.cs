@@ -8,23 +8,73 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour
 {
+	[SerializeField] private GameObject jackObject;
+	[SerializeField] private CharacterParams jackParams;
+	[SerializeField] private GameObject peterObject;
+	[SerializeField] private CharacterParams peterParams;
+
 	private Rigidbody2D rb2d;
-	private Animator animator;
 	private PlayerMovement movement;
+	private PlayerInput input;
 	public bool isFacingRight {get; private set;} = true;
+	public Animator currentAnimator {get; private set;}
+	public CharacterParams currentCharacterParams {get; private set;}
 
 	public HealthBar healthBar;
 	public bool isInvincible = false;
 	public float maxLife = 10f;
 
 	public float life {get; private set;}
-	
+
+	private CharacterState characterState = CharacterState.Jack;
+
 	private void Awake()
 	{
 		rb2d = GetComponent<Rigidbody2D>();
-		animator = GetComponent<Animator>();
 		movement = GetComponent<PlayerMovement>();
+		input = GetComponent<PlayerInput>();
 		SetLife(maxLife);
+		currentCharacterParams = jackParams;
+		currentAnimator = jackObject.GetComponent<Animator>();
+	}
+
+
+	void Update()
+	{
+		// Check for character change input
+		if (input.switchCharacterInput)
+		{
+			SwitchCharacter();
+		}
+	}
+
+
+	private void SetCharacterState(CharacterState newState)
+	{
+		characterState = newState;
+	}
+
+
+	private void SwitchCharacter()
+	{
+		if (characterState == CharacterState.Jack)
+		{
+			// If current character is jack, switch to peter
+			jackObject.SetActive(false);
+			peterObject.SetActive(true);
+			SetCharacterState(CharacterState.Peter);
+			currentCharacterParams = peterParams;
+			currentAnimator = peterObject.GetComponent<Animator>();
+		}
+		else if (characterState == CharacterState.Peter)
+		{
+			// If current character is peter, switch to jack
+			jackObject.SetActive(true);
+			peterObject.SetActive(false);
+			SetCharacterState(CharacterState.Jack);
+			currentCharacterParams = jackParams;
+			currentAnimator = jackObject.GetComponent<Animator>();
+		}
 	}
 
 
@@ -81,7 +131,7 @@ public class CharacterController2D : MonoBehaviour
 			return;
 		}
 
-		animator.SetBool("Hit", true);
+		currentAnimator.SetBool("Hit", true);
 
 		life -= damage;
 		SetLife(life - damage);
@@ -126,7 +176,7 @@ public class CharacterController2D : MonoBehaviour
 
 	IEnumerator WaitToDead()
 	{
-		animator.SetBool("IsDead", true);
+		currentAnimator.SetBool("IsDead", true);
 		movement.DisableMovement();
 		isInvincible = true;
 
@@ -138,4 +188,10 @@ public class CharacterController2D : MonoBehaviour
 	// Damage-taking related end
 	// ========================
 
+}
+
+public enum CharacterState
+{
+	Jack,
+	Peter
 }

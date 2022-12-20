@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
-	public Animator animator;
 	public PlayerInput input;
 
 	private Rigidbody2D rb2d;
@@ -17,7 +16,6 @@ public class PlayerMovement : MonoBehaviour {
 	public bool enableAirControl = true;
 	public LayerMask groundLayer;
 	public Transform groundCheck;
-	public float runSpeed = 10f;
 
 	private PlayerMovementState state = PlayerMovementState.OnGround;
 	private bool canMove = true;
@@ -84,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void Landing()
 	{
 		SetState(PlayerMovementState.OnGround);
-		animator.SetBool("IsJumping", false);
+		controller.currentAnimator.SetBool("IsJumping", false);
 	}
 
 
@@ -99,20 +97,25 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			// Jump availability check
-			if (state == PlayerMovementState.OnGround)
+			if (state == PlayerMovementState.OnGround && controller.currentCharacterParams.canJump)
 			{
 				Jump();
 			}
 
+			// Roll availability check
+			if (state == PlayerMovementState.OnGround && controller.currentCharacterParams.canRoll)
+			{
+				Roll();
+			}
 		}
 	}
 
 
 	private void MoveHorizontal()
 	{
-		animator.SetFloat("Speed", Mathf.Abs(input.xMovement));
+		controller.currentAnimator.SetFloat("Speed", Mathf.Abs(input.xMovement));
 
-		Vector3 targetVelocity = new Vector2(input.xMovement * runSpeed, rb2d.velocity.y);
+		Vector3 targetVelocity = new Vector2(input.xMovement * controller.currentCharacterParams.runSpeed, rb2d.velocity.y);
 		// Smooth movement
 		rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity, targetVelocity, ref velocity, movementSmoothing);
 		// rb2d.velocity = targetVelocity;
@@ -137,34 +140,46 @@ public class PlayerMovement : MonoBehaviour {
 		if (input.jumpInput) {
 			SetState(PlayerMovementState.InAir);
 
-			animator.SetBool("IsJumping", true);
+			controller.currentAnimator.SetBool("IsJumping", true);
 
 			rb2d.AddForce(new Vector2(0f, jumpForce));
 		}
 	}
 
 
-	private void DoubleJump()
+	private void Roll()
 	{
 		if (input.jumpInput)
 		{
-			animator.SetBool("IsDoubleJumping", true);
+			SetState(PlayerMovementState.InRoll);
 
-			rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-			rb2d.AddForce(new Vector2(0f, jumpForce * 0.9f));
+			float speedX = controller.currentCharacterParams.rollSpeed;
+			if (!controller.isFacingRight)
+			{
+				speedX *= -1;
+			}
+			rb2d.velocity = new Vector2(speedX, 0);
+
+			controller.currentAnimator.SetTrigger("Roll");
 		}
+	}
+
+
+	public void OnRollEnd()
+	{
+		SetState(PlayerMovementState.OnGround);
 	}
 
 
 	public void OnFall()
 	{
-		animator.SetBool("IsJumping", true);
+		controller.currentAnimator.SetBool("IsJumping", true);
 	}
 
 
 	public void OnLanding()
 	{
-		animator.SetBool("IsJumping", false);
+		controller.currentAnimator.SetBool("IsJumping", false);
 	}
 
 
@@ -172,7 +187,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		velocity = Vector3.zero;
 		rb2d.velocity = Vector2.zero;
-		animator.SetFloat("Speed", 0);
+		controller.currentAnimator.SetFloat("Speed", 0);
 		canMove = false;
 	}
 
@@ -185,5 +200,6 @@ public class PlayerMovement : MonoBehaviour {
 
 public enum PlayerMovementState {
 	OnGround,
-	InAir
+	InAir,
+	InRoll
 }

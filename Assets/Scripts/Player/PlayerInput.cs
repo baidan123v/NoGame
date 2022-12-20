@@ -8,10 +8,13 @@ public class PlayerInput : MonoBehaviour
     public bool jumpInput {get; private set;}
     public bool meleeAttackInput {get; private set;}
     public bool rangeAttackInput {get; private set;}
+    public bool switchCharacterInput {get; private set;}
     
-    private KeyCode moveLeftKey = KeyCode.LeftArrow;
-    private KeyCode moveRightKey = KeyCode.RightArrow;
-    private KeyCode jumpKey = KeyCode.UpArrow;
+    private KeyCode moveLeftKey = KeyCode.A;
+    private KeyCode moveRightKey = KeyCode.D;
+    private KeyCode jumpKey = KeyCode.W;
+    private KeyCode jumpKey2 = KeyCode.Space;
+    private KeyCode switchCharacterKey = KeyCode.R;
     private KeyCode meleeAttackKey = KeyCode.J;
     private KeyCode rangeAttackKey = KeyCode.K;
 
@@ -30,9 +33,10 @@ public class PlayerInput : MonoBehaviour
             xMovement = 0;
         }
 
-        jumpInput = Input.GetKeyDown(jumpKey);
+        jumpInput = Input.GetKeyDown(jumpKey) || Input.GetKeyDown(jumpKey2);
         meleeAttackInput = Input.GetKeyDown(meleeAttackKey);
         rangeAttackInput = Input.GetKeyDown(rangeAttackKey);
+        switchCharacterInput = Input.GetKeyDown(switchCharacterKey);
     }
 
 
