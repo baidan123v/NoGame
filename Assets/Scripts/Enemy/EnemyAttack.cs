@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(MeleeEnemy))]
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float attackPower = 10f;
 
     [SerializeField] private Transform attackPoint;
     private Animator animator;
-    private Enemy enemyController;
+    private MeleeEnemy enemyController;
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        enemyController = GetComponent<Enemy>();
+        enemyController = GetComponent<MeleeEnemy>();
     }
     
 
@@ -29,10 +29,7 @@ public class EnemyAttack : MonoBehaviour
                 StartAttack();
             }
         }
-    }
-
-
-    
+    }  
 
 
     public void StartAttack()

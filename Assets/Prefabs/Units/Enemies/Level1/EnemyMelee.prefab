@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 9148167240798266843}
   - component: {fileID: 9148167240798266837}
   - component: {fileID: 9148167240798266842}
-  - component: {fileID: 9148167240798266839}
   - component: {fileID: 9148167240798266836}
   - component: {fileID: 9148167240798266838}
+  - component: {fileID: 3668477066838446199}
   m_Layer: 6
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -200,30 +200,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &9148167240798266839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9148167240798266847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c7d8c2de374c649ad97302f1f28877, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 10
-  speed: 3
-  fallCheck: {fileID: 9148167240239309414}
-  wallCheck: {fileID: 9148167239715937382}
-  obstaclesMask:
-    serializedVersion: 2
-    m_Bits: 256
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 256
-  isFacingRight: 1
-  isInvincible: 0
 --- !u!95 &9148167240798266836
 Animator:
   serializedVersion: 4
@@ -258,3 +234,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 10
   attackPoint: {fileID: 9148167239715937382}
+--- !u!114 &3668477066838446199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148167240798266847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a3c971e957601459053a66f0495031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 10
+  speed: 3
+  collisionAttackPower: 15
+  isInvincible: 0
+  fallCheck: {fileID: 9148167240239309414}
+  wallCheck: {fileID: 9148167239715937382}
+  obstaclesMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  isFacingRight: 1

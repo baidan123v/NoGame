@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+[RequireComponent(typeof(CircleCollider2D))]
+public class RangedEnemy : Enemy
 {
     [SerializeField] private CircleCollider2D attackRange;
     [SerializeField] private Transform attackPosition;
@@ -39,5 +40,34 @@ public class RangedEnemy : MonoBehaviour
         
         projectileController.direction = direction.normalized;
         projectileController.StartMovement();
+    }
+
+
+	void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player" && life > 0)
+		{
+			collision.gameObject.GetComponent<CharacterController2D>().GetHit(collisionAttackPower, transform.position);
+		}
+	}
+
+
+	IEnumerator HitTime()
+	{
+		isInvincible = true;
+		yield return new WaitForSeconds(0.1f);
+		isInvincible = false;
+	}
+
+
+	override public IEnumerator DestroyEnemy()
+	{
+		yield return new WaitForSeconds(3f);
+		Destroy(gameObject);
+	}
+
+    public override void Knockback(Vector3 hitPosition, float knockbackMultiplier)
+    {
+        
     }
 }
