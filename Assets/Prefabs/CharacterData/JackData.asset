@@ -15,3 +15,4 @@ MonoBehaviour:
   runSpeed: 10
   canJump: 1
   canRoll: 0
+  skillForce: 400

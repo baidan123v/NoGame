@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D rb2d;
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-	public float jumpForce = 400f;
 	[Range(0, .3f)] public float movementSmoothing = .05f;
 	public bool enableAirControl = true;
 	public LayerMask groundLayer;
@@ -142,7 +141,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			controller.currentAnimator.SetBool("IsJumping", true);
 
-			rb2d.AddForce(new Vector2(0f, jumpForce));
+			rb2d.AddForce(new Vector2(0f, controller.currentCharacterParams.skillForce));
 		}
 	}
 
@@ -153,7 +152,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			SetState(PlayerMovementState.InRoll);
 
-			float speedX = controller.currentCharacterParams.rollSpeed;
+			float speedX = controller.currentCharacterParams.skillForce;
 			if (!controller.isFacingRight)
 			{
 				speedX *= -1;

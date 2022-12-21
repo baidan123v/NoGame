@@ -8,5 +8,5 @@ public class CharacterParams : ScriptableObject
     public float runSpeed = 10f;
     public bool canJump = true;
     public bool canRoll = true;
-    public float rollSpeed = 50f;
+    public float skillForce = 10f;
 }
