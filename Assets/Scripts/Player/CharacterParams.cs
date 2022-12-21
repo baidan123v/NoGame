@@ -9,4 +9,5 @@ public class CharacterParams : ScriptableObject
     public bool canJump = true;
     public bool canRoll = true;
     public float skillForce = 10f;
+    public int attackPower = 10;
 }

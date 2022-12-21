@@ -142,7 +142,7 @@ public class CharacterController2D : MonoBehaviour
 			return;
 		}
 
-		currentAnimator.SetBool("Hit", true);
+		// currentAnimator.SetBool("Hit", true);
 
 		life -= damage;
 		SetLife(life - damage);

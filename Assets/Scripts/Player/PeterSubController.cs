@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeterController : MonoBehaviour
+public class PeterSubController : CharacterSubScontroller
 {
     public PlayerMovement movement;
 

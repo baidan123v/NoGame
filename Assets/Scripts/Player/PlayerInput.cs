@@ -9,14 +9,14 @@ public class PlayerInput : MonoBehaviour
     public bool meleeAttackInput {get; private set;}
     public bool rangeAttackInput {get; private set;}
     public bool switchCharacterInput {get; private set;}
+    public bool attackInput {get; private set;}
+    public Vector2 attackPoint {get; private set;}
     
     private KeyCode moveLeftKey = KeyCode.A;
     private KeyCode moveRightKey = KeyCode.D;
     private KeyCode jumpKey = KeyCode.W;
     private KeyCode jumpKey2 = KeyCode.Space;
     private KeyCode switchCharacterKey = KeyCode.R;
-    private KeyCode meleeAttackKey = KeyCode.J;
-    private KeyCode rangeAttackKey = KeyCode.K;
 
     void Update()
     {
@@ -34,28 +34,11 @@ public class PlayerInput : MonoBehaviour
         }
 
         jumpInput = Input.GetKeyDown(jumpKey) || Input.GetKeyDown(jumpKey2);
-        meleeAttackInput = Input.GetKeyDown(meleeAttackKey);
-        rangeAttackInput = Input.GetKeyDown(rangeAttackKey);
         switchCharacterInput = Input.GetKeyDown(switchCharacterKey);
-    }
-
-
-    public void alterControls()
-    {
-        moveLeftKey = KeyCode.W;
-        moveRightKey = KeyCode.X;
-        jumpKey = KeyCode.S;
-        meleeAttackKey = KeyCode.O;
-        rangeAttackKey = KeyCode.L;
-    }
-
-
-    public void restoreControls()
-    {
-        moveLeftKey = KeyCode.A;
-        moveRightKey = KeyCode.D;
-        jumpKey = KeyCode.W;
-        meleeAttackKey = KeyCode.J;
-        rangeAttackKey = KeyCode.K;
+        attackInput = Input.GetMouseButtonDown(0);
+        if (attackInput)
+        {
+            attackPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
     }
 }
