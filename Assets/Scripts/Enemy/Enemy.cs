@@ -26,6 +26,8 @@ public abstract class Enemy : MonoBehaviour {
 
 	public void GetHit(float damage, Vector3 hitPosition)
 	{
+		Debug.Log("Enemy hit");
+		Debug.Log(gameObject);
 		if (!isInvincible)
 		{
 			ApplyDamage(damage);

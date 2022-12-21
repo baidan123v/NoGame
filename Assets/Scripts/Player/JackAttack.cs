@@ -34,7 +34,7 @@ public class JackAttack : MonoBehaviour
         Collider2D[] collidersFront = Physics2D.OverlapCircleAll(attackPoint.position, 0.9f);
         for (int i = 0; i < collidersFront.Length; i++)
 		{
-			if (collidersFront[i].gameObject.tag == "Enemy")
+			if (!collidersFront[i].isTrigger && collidersFront[i].gameObject.tag == "Enemy")
 			{
                 collidersFront[i].gameObject.GetComponent<Enemy>().GetHit(mainController.currentCharacterParams.attackPower, transform.position);
                 return;

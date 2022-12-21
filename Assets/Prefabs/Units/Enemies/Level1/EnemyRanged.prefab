@@ -106,7 +106,7 @@ MonoBehaviour:
   isInvincible: 0
   attackRange: {fileID: 0}
   attackPosition: {fileID: 2951129524603419172}
-  reloadSeconds: 1
+  reloadSeconds: 1.5
   projectilePrefab: {fileID: 530147138682871679, guid: b61b4919024d773498dd19503911c060, type: 3}
 --- !u!58 &2951129524470562562
 CircleCollider2D:
@@ -121,9 +121,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.1235814, y: 0}
+  m_Offset: {x: -4.4884286, y: 0}
   serializedVersion: 2
-  m_Radius: 4.7985816
+  m_Radius: 4.4337344
 --- !u!61 &7331877872064809420
 BoxCollider2D:
   m_ObjectHideFlags: 0

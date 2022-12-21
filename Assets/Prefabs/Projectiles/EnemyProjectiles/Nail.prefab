@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   hasHit: 0
-  speed: 20
+  speed: 7
   dmgValue: 15
 --- !u!50 &933150691892155703
 Rigidbody2D:
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.25}
+    oldSize: {x: 0.5, y: 0.3125}
     newSize: {x: 0.4, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

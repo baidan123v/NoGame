@@ -22,7 +22,7 @@ public class ThrowableWeapon : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.CompareTag("Enemy"))
+		if (!collision.collider.isTrigger && collision.gameObject.CompareTag("Enemy"))
 		{
 			GameObject enemy = collision.gameObject;
 

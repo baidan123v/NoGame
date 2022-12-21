@@ -413,7 +413,7 @@ MonoBehaviour:
   peterParams: {fileID: 11400000, guid: cb8fa0717e3b58e4e979d54a63eba5d0, type: 2}
   healthBar: {fileID: 0}
   isInvincible: 0
-  maxLife: 10
+  maxLife: 100
 --- !u!114 &3464287080014738170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3464287080682687589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.745, y: 0.17, z: 0}
+  m_LocalPosition: {x: 1, y: 0.155, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

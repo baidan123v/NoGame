@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdced019f326054b869c24ea926e4f5, type: 3}
   m_Name: JackData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterParamsScriptableObject
-  runSpeed: 10
+  runSpeed: 7
   canJump: 1
   canRoll: 0
-  skillForce: 400
+  skillForce: 350
+  attackPower: 10
