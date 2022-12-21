@@ -15,3 +15,4 @@ MonoBehaviour:
   runSpeed: 5
   canJump: 0
   canRoll: 1
+  rollSpeed: 10

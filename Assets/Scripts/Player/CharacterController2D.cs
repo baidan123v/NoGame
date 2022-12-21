@@ -34,8 +34,19 @@ public class CharacterController2D : MonoBehaviour
 		movement = GetComponent<PlayerMovement>();
 		input = GetComponent<PlayerInput>();
 		SetLife(maxLife);
-		currentCharacterParams = jackParams;
-		currentAnimator = jackObject.GetComponent<Animator>();
+		if (jackObject.activeSelf)
+		{
+			currentCharacterParams = jackParams;
+			characterState = CharacterState.Jack;
+			currentAnimator = jackObject.GetComponent<Animator>();
+		}
+		else
+		{
+			characterState = CharacterState.Peter;
+			currentCharacterParams = peterParams;
+			currentAnimator = peterObject.GetComponent<Animator>();
+		}
+		
 	}
 
 
