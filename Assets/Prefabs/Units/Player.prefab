@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2194958121099706736}
   - component: {fileID: 2194958121099706743}
   - component: {fileID: 3654466168371059430}
+  - component: {fileID: 1796028605567134785}
   m_Layer: 7
   m_Name: Jack
   m_TagString: Player
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 3464287080682687588}
   input: {fileID: 3464287080014738171}
+--- !u!114 &1796028605567134785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194958121099706697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb5eeda73e06744bab66b5992b0212d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentController: {fileID: 3464287080014738169}
 --- !u!1 &2194958121377733763
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,9 +195,10 @@ GameObject:
   - component: {fileID: 3464287079905468806}
   - component: {fileID: 3464287079905468811}
   - component: {fileID: 3464287079905468804}
+  - component: {fileID: 6484808217733040180}
   m_Layer: 0
   m_Name: Peter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,10 +315,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3464287079905468801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0db44a81ffd49d49b012b9ea84bf2b9, type: 3}
+  m_Script: {fileID: 11500000, guid: d850a61b350b7804fb78eb8e770131be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentController: {fileID: 3464287080014738169}
   movement: {fileID: 3464287080014738170}
+--- !u!114 &6484808217733040180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464287079905468801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0012ffe1ba219db4cb042493d7a9918a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 3464287080682687588}
+  input: {fileID: 3464287080014738171}
+  projectilePrefab: {fileID: 3262140117210010714, guid: 59942b7169de6644593afbc7e61f9770, type: 3}
 --- !u!1 &3464287080014738165
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +350,7 @@ GameObject:
   - component: {fileID: 3464287080014738171}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

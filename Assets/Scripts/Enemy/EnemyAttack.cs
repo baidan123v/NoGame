@@ -9,18 +9,19 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField] private Transform attackPoint;
     private Animator animator;
-    private EnemyAttackState attackState = EnemyAttackState.Waiting;
+    private Enemy enemyController;
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        enemyController = GetComponent<Enemy>();
     }
     
 
     void Update()
     {
-        if (attackState == EnemyAttackState.Waiting)
+        if (enemyController.state == EnemyState.Waiting)
         {
             GameObject playerOnAttackPoint = CheckPlayerOnAttackPoint();
             if (playerOnAttackPoint != null)
@@ -31,16 +32,14 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
-    public void SetAttackState(EnemyAttackState newState)
-    {
-        attackState = newState;
-    }
+    
 
 
     public void StartAttack()
     {
         animator.SetTrigger("Attack");
-        SetAttackState(EnemyAttackState.Attacking);
+        enemyController.DisableMovement();
+        enemyController.SetState(EnemyState.Attacking);
     }
 
 
@@ -49,7 +48,19 @@ public class EnemyAttack : MonoBehaviour
         GameObject playerOnAttackPoint = CheckPlayerOnAttackPoint();
         if (playerOnAttackPoint != null)
         {
-            playerOnAttackPoint.GetComponent<CharacterSubScontroller>().parentController.GetHit(attackPower, transform.position);
+            playerOnAttackPoint.GetComponent<CharacterSubController>().parentController.GetHit(attackPower, transform.position);
+        }
+    }
+
+    
+    public void OnAttackEnd()
+    {
+        // Attacking state was set on animation start, and if it was not changed to dead state during animation,
+        // it gets reverted to waiting state
+        if (enemyController.state == EnemyState.Attacking)
+        {
+            enemyController.SetState(EnemyState.Waiting);
+            enemyController.EnableMovement();
         }
     }
 

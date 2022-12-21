@@ -86,6 +86,7 @@ public class CharacterController2D : MonoBehaviour
 			currentCharacterParams = jackParams;
 			currentAnimator = jackObject.GetComponent<Animator>();
 		}
+		movement.SetState(PlayerMovementState.OnGround);
 	}
 
 

@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour {
 	public Transform wallCheck;
 	public LayerMask obstaclesMask;
 	public LayerMask groundMask;
-	public bool canMove = true;
+	[SerializeField] public bool canMove {get; private set;} = true;
+	public EnemyState state {get; private set;} = EnemyState.Waiting;
 
 	private Rigidbody2D rb2d;
 	private Animator animator;
@@ -36,6 +37,13 @@ public class Enemy : MonoBehaviour {
 			Die();
 		}
 	}
+
+
+	public void SetState(EnemyState newState)
+    {
+        state = newState;
+    }
+
 	
 	void FixedUpdate () {
 		CheckEndOfSpace();
@@ -126,6 +134,7 @@ public class Enemy : MonoBehaviour {
 	
 	public void Die()
 	{
+		SetState(EnemyState.Dead);
 		StartCoroutine(DestroyEnemy());
 	}
 
@@ -145,10 +154,24 @@ public class Enemy : MonoBehaviour {
 		yield return new WaitForSeconds(3f);
 		Destroy(gameObject);
 	}
+
+	
+	public void EnableMovement()
+	{
+		canMove = true;
+	}
+
+
+	public void DisableMovement()
+	{
+		canMove = false;
+		rb2d.velocity = Vector2.zero;
+	}
 }
 
 
-public enum EnemyAttackState {
+public enum EnemyState {
     Waiting,
-    Attacking
+    Attacking,
+	Dead
 }

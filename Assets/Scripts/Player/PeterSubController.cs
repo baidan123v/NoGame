@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeterSubController : CharacterSubScontroller
+[RequireComponent(typeof(PeterAttack))]
+public class PeterSubController : CharacterSubController
 {
     public PlayerMovement movement;
 

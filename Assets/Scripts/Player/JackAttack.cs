@@ -4,10 +4,13 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(JackSubController))]
 public class JackAttack : MonoBehaviour
 {
     [SerializeField] private Transform attackPoint;
     [SerializeField] private PlayerInput input;
+    
+    private CharacterController2D mainController;
 
     private Animator animator;
 
@@ -15,6 +18,7 @@ public class JackAttack : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        mainController = GetComponent<JackSubController>().parentController;
     }
 
     void Update()
@@ -25,8 +29,16 @@ public class JackAttack : MonoBehaviour
         }
     }
 
-    public void PerformAttack()
+    public void OnAttackFrame()
     {
-        Debug.Log("Attacked");
+        Collider2D[] collidersFront = Physics2D.OverlapCircleAll(attackPoint.position, 0.9f);
+        for (int i = 0; i < collidersFront.Length; i++)
+		{
+			if (collidersFront[i].gameObject.tag == "Enemy")
+			{
+                collidersFront[i].gameObject.GetComponent<Enemy>().GetHit(mainController.currentCharacterParams.attackPower, transform.position);
+                return;
+			}
+		}
     }
 }

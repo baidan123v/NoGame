@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 
-	private void SetState(PlayerMovementState newState)
+	public void SetState(PlayerMovementState newState)
 	{
 		state = newState;
 	}
