@@ -272,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbe62001d590d644aaea67c21cbd74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpController: {fileID: 7837804968534023039}
   knockbackMultiplier: 0
   HitEvent:
     m_PersistentCalls:

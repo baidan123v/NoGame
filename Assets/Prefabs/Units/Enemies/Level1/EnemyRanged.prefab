@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2951129524470562621}
   - component: {fileID: 2951129524470562563}
-  - component: {fileID: 2951129524470562620}
   - component: {fileID: 2951129524470562562}
   - component: {fileID: 7331877872064809420}
   - component: {fileID: 2409104616825326166}
+  - component: {fileID: 2951129524470562620}
   - component: {fileID: 8943227814932158429}
   - component: {fileID: 6666474660222365857}
   m_Layer: 0
@@ -91,24 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2951129524470562620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2951129524470562622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad4b9fd57f18f146b1935a2524ac70e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  collisionAttackPower: 15
-  isInvincible: 0
-  attackPosition: {fileID: 2951129524603419172}
-  reloadSeconds: 1.5
-  projectilePrefab: {fileID: 530147138682871679, guid: b61b4919024d773498dd19503911c060, type: 3}
 --- !u!58 &2951129524470562562
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -160,7 +142,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2951129524470562622}
   m_BodyType: 2
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -172,6 +154,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2951129524470562620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951129524470562622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad4b9fd57f18f146b1935a2524ac70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  collisionAttackPower: 15
+  isInvincible: 0
+  attackPosition: {fileID: 2951129524603419172}
+  reloadSeconds: 1.5
+  projectilePrefab: {fileID: 530147138682871679, guid: b61b4919024d773498dd19503911c060, type: 3}
 --- !u!114 &8943227814932158429
 MonoBehaviour:
   m_ObjectHideFlags: 0
