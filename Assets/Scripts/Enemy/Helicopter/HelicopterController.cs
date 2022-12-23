@@ -8,6 +8,11 @@ public class HelicopterController : MonoBehaviour
 {
     [SerializeField] private List<Transform> followPoints;
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackDelaySeconds = 2f;
+    [SerializeField] private GameObject hpBarContainer;
 
     private Rigidbody2D rb2d;
     private BoxCollider2D collider;
@@ -37,6 +42,7 @@ public class HelicopterController : MonoBehaviour
     {
         SetState(HelicopterState.Flying);
         animator.SetBool("IsFlying", true);
+        hpBarContainer.SetActive(true);
         MoveToNextPoint();
     }
 
@@ -64,7 +70,7 @@ public class HelicopterController : MonoBehaviour
     {
         if (collider.OverlapPoint(followPoints[currentFollowIndex].position))
         {
-            MoveToNextPoint();
+            StartCoroutine(Attack());
         }
     }
 
@@ -74,6 +80,30 @@ public class HelicopterController : MonoBehaviour
         Vector2 direction = point.position - transform.position;
         direction.Normalize();
         return direction;
+    }
+
+
+    IEnumerator Attack()
+    {
+        SetState(HelicopterState.Attacking);
+        rb2d.velocity = Vector2.zero;
+        SpawnProjectile();
+        yield return new WaitForSeconds(attackDelaySeconds);
+        SetState(HelicopterState.Flying);
+        MoveToNextPoint();
+    }
+
+
+    void SpawnProjectile()
+    {
+        Vector2 startPosition = attackPoint.position;
+        Vector2 playerPosition = player.transform.position;
+        Vector2 direction = (playerPosition - startPosition).normalized;
+
+        GameObject bullet = GameObject.Instantiate(projectilePrefab, startPosition, Quaternion.Euler(0, 0, 0));
+        EnemyProjectile bulletController = bullet.GetComponent<EnemyProjectile>();
+        bulletController.direction = player.transform.position - attackPoint.transform.position;
+        bulletController.StartMovement();
     }
 
 

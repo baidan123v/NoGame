@@ -15,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private GameObject peterObject;
 	[SerializeField] private CharacterParams peterParams;
 	[SerializeField] private float damageStunDuration;
+	[SerializeField] private float deathDelay;
 
 	private Rigidbody2D rb2d;
 	private PlayerMovement movement;
@@ -133,10 +134,8 @@ public class CharacterController2D : MonoBehaviour
 	{
 		currentAnimator.SetBool("IsDead", true);
 		movement.DisableMovement();
-
-		yield return new WaitForSeconds(0.4f);
 		rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(deathDelay);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 	// Damage-taking related end
