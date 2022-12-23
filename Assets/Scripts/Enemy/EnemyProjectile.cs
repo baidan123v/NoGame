@@ -22,6 +22,7 @@ public class EnemyProjectile : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
+		Debug.Log("enemy projectile collide");
 		if (collision.gameObject.CompareTag("Player"))
 		{
 			GameObject player = collision.gameObject;

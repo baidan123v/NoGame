@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainIntroDialog : MonoBehaviour 
 
@@ -12,14 +13,14 @@ public class MainIntroDialog : MonoBehaviour
 
     void Start()
     {
-        contentImageComponent = contentImageHolder.GetComponent<UnityEngine.UI.Image>();
-        StartCoroutine(ChangeImage(3.0f));
+        // contentImageComponent = contentImageHolder.GetComponent<UnityEngine.UI.Image>();
+        StartCoroutine(LoadNextLevel(2.0f));   
     }
 
-    IEnumerator ChangeImage(float delay) {
-        yield return new WaitForSeconds(delay);
 
-        contentImageComponent.sprite = newImage;
+    IEnumerator LoadNextLevel(float delay) {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("FirstLevel");
     }
 
     // Update is called once per frame

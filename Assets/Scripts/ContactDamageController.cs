@@ -45,10 +45,13 @@ public class ContactDamageController : MonoBehaviour
 
     public void Knockback(Vector3 hitPosition)
 	{
-		Vector2 damageDir = Vector3.Normalize(transform.position - hitPosition);
-		damageDir.y = 0.4f;
-		
-		rb2d.velocity = Vector2.zero;
-		rb2d.AddForce(damageDir * knockbackMultiplier);
+		if (knockbackMultiplier != 0)
+		{
+			Vector2 damageDir = Vector3.Normalize(transform.position - hitPosition);
+			damageDir.y = 0.4f;
+			
+			rb2d.velocity = Vector2.zero;
+			rb2d.AddForce(damageDir * knockbackMultiplier);
+		}
 	}
 }
