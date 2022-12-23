@@ -3233,6 +3233,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6916599, y: 1.5119598}
   m_EdgeRadius: 0
+--- !u!58 &1068624539 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2951129524470562562, guid: bd801098c41a2624c917006cbcf16ee1, type: 3}
+  m_PrefabInstance: {fileID: 2951129524116858019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1080002073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3312,7 +3317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080002073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.0871973, y: -1, z: 0}
+  m_LocalPosition: {x: -7.0864897, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3629,6 +3634,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3464287080014738164, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
   m_PrefabInstance: {fileID: 3464287081284843971}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1270205240 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6579323802108172793, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
+  m_PrefabInstance: {fileID: 3464287081284843971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f82474dd90fe574cbdb11d73f94f706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1378432112
 GameObject:
   m_ObjectHideFlags: 3
@@ -6089,6 +6105,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1169553019}
     m_Modifications:
+    - target: {fileID: 2951129524470562620, guid: bd801098c41a2624c917006cbcf16ee1, type: 3}
+      propertyPath: attackRange
+      value: 
+      objectReference: {fileID: 1068624539}
     - target: {fileID: 2951129524470562621, guid: bd801098c41a2624c917006cbcf16ee1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6225,6 +6245,22 @@ PrefabInstance:
     - target: {fileID: 3464287080682687588, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579323802108172793, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
+      propertyPath: maxLife
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579323802108172793, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 329714941}
+    - target: {fileID: 8726455318478309422, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
+      propertyPath: hpController
+      value: 
+      objectReference: {fileID: 1270205240}
+    - target: {fileID: 8726455318478309422, guid: 6dfb21d9841b12d4c9586cfbfc03a18c, type: 3}
+      propertyPath: knockbackMultiplier
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

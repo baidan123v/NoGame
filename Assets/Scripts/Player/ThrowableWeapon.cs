@@ -26,7 +26,7 @@ public class ThrowableWeapon : MonoBehaviour
 		{
 			GameObject enemy = collision.gameObject;
 
-			enemy.GetComponent<Enemy>().GetHit(dmgValue, transform.position);
+			enemy.GetComponent<ContactDamageController>().GetHit(dmgValue, transform.position);
 			Destroy(gameObject);
 		}
 		else if (!collision.gameObject.CompareTag("Player"))

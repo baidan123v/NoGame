@@ -36,7 +36,7 @@ public class JackAttack : MonoBehaviour
 		{
 			if (!collidersFront[i].isTrigger && collidersFront[i].gameObject.tag == "Enemy")
 			{
-                collidersFront[i].gameObject.GetComponent<Enemy>().GetHit(mainController.currentCharacterParams.attackPower, transform.position);
+                collidersFront[i].gameObject.GetComponent<ContactDamageController>().GetHit(mainController.currentCharacterParams.attackPower, transform.position);
                 return;
 			}
 		}

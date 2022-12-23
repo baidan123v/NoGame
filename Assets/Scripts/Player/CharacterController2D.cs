@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(ContactDamageController))]
+[RequireComponent(typeof(HPController))]
 public class CharacterController2D : MonoBehaviour
 {
 	[SerializeField] private GameObject jackObject;
 	[SerializeField] private CharacterParams jackParams;
 	[SerializeField] private GameObject peterObject;
 	[SerializeField] private CharacterParams peterParams;
+	[SerializeField] private float damageStunDuration;
 
 	private Rigidbody2D rb2d;
 	private PlayerMovement movement;
@@ -19,12 +22,8 @@ public class CharacterController2D : MonoBehaviour
 	public bool isFacingRight {get; private set;} = true;
 	public Animator currentAnimator {get; private set;}
 	public CharacterParams currentCharacterParams {get; private set;}
-
-	public HealthBar healthBar;
-	public bool isInvincible = false;
-	public float maxLife = 10f;
-
-	public float life {get; private set;}
+	public HPController hpController {get; private set;}
+	public ContactDamageController contactDamageController {get; private set;}
 
 	private CharacterState characterState = CharacterState.Jack;
 
@@ -33,7 +32,7 @@ public class CharacterController2D : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D>();
 		movement = GetComponent<PlayerMovement>();
 		input = GetComponent<PlayerInput>();
-		SetLife(maxLife);
+		
 		if (jackObject.activeSelf)
 		{
 			currentCharacterParams = jackParams;
@@ -47,6 +46,11 @@ public class CharacterController2D : MonoBehaviour
 			currentAnimator = peterObject.GetComponent<Animator>();
 		}
 		
+		contactDamageController = GetComponent<ContactDamageController>();
+		contactDamageController.HitEvent.AddListener(StunOnDamage);
+
+		hpController = GetComponent<HPController>();
+		hpController.DeathEvent.AddListener(Die);
 	}
 
 
@@ -102,71 +106,12 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	// ========================
-	// Life/mana related
-	public void RestoreLife(float amount)
-	{
-		float newLife = life + amount;
-		if (newLife > maxLife)
-		{
-			newLife = maxLife;
-		}
-		SetLife(newLife);
-	}
-
-
-	public void SetLife(float newLife)
-	{
-		life = newLife;
-		healthBar.SetHealth(newLife, maxLife);
-	}
-	// Life/mana related end
-	// ========================
-
 
 	// ========================
 	// Damage-taking related
-	public void GetHit(float damage, Vector3 hitPosition)
+	void StunOnDamage()
 	{
-		if (!isInvincible)
-		{
-			ApplyDamage(damage);
-			Knockback(hitPosition, 600f);
-		}
-	}
-
-
-	public void ApplyDamage(float damage) 
-	{
-		if (isInvincible)
-		{
-			return;
-		}
-
-		// currentAnimator.SetBool("Hit", true);
-
-		life -= damage;
-		SetLife(life - damage);
-
-		if (life <= 0)
-		{
-			StartCoroutine(WaitToDead());
-		}
-		else
-		{
-			StartCoroutine(Stun(0.25f));
-			StartCoroutine(MakeInvincible(1f));
-		}
-	}
-
-
-	public void Knockback(Vector3 hitPosition, float knockbackMultiplier)
-	{
-		Vector2 damageDir = Vector3.Normalize(transform.position - hitPosition);
-		damageDir.y = 0.4f;
-		
-		rb2d.velocity = Vector2.zero;
-		rb2d.AddForce(damageDir * knockbackMultiplier);
+		Stun(damageStunDuration);
 	}
 
 
@@ -178,11 +123,9 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	IEnumerator MakeInvincible(float time) 
+	void Die()
 	{
-		isInvincible = true;
-		yield return new WaitForSeconds(time);
-		isInvincible = false;
+		StartCoroutine(WaitToDead());
 	}
 
 
@@ -190,7 +133,6 @@ public class CharacterController2D : MonoBehaviour
 	{
 		currentAnimator.SetBool("IsDead", true);
 		movement.DisableMovement();
-		isInvincible = true;
 
 		yield return new WaitForSeconds(0.4f);
 		rb2d.velocity = new Vector2(0, rb2d.velocity.y);

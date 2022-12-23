@@ -26,7 +26,7 @@ public class EnemyProjectile : MonoBehaviour
 		{
 			GameObject player = collision.gameObject;
 
-			player.GetComponent<CharacterController2D>().GetHit(dmgValue, transform.position);
+			player.GetComponent<ContactDamageController>().GetHit(dmgValue, transform.position);
 			Destroy(gameObject);
 		}
 		else if (!collision.gameObject.CompareTag("Enemy"))

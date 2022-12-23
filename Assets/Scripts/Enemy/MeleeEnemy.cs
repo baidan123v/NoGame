@@ -79,16 +79,6 @@ public class MeleeEnemy : Enemy
 	}
 
 
-    override public void Knockback(Vector3 hitPosition, float knockbackMultiplier)
-	{
-		Vector2 damageDir = Vector3.Normalize(transform.position - hitPosition);
-		damageDir.y = 0.4f;
-		
-		rb2d.velocity = Vector2.zero;
-		rb2d.AddForce(damageDir * knockbackMultiplier);
-	}
-
-
     override public IEnumerator DestroyEnemy()
 	{
 		canMove = false;

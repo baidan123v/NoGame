@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 2951129524470562620}
   - component: {fileID: 2951129524470562562}
   - component: {fileID: 7331877872064809420}
+  - component: {fileID: 2409104616825326166}
+  - component: {fileID: 8943227814932158429}
+  - component: {fileID: 6666474660222365857}
   m_Layer: 0
   m_Name: EnemyRanged
   m_TagString: Enemy
@@ -100,11 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad4b9fd57f18f146b1935a2524ac70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 10
   speed: 3
   collisionAttackPower: 15
   isInvincible: 0
-  attackRange: {fileID: 0}
   attackPosition: {fileID: 2951129524603419172}
   reloadSeconds: 1.5
   projectilePrefab: {fileID: 530147138682871679, guid: b61b4919024d773498dd19503911c060, type: 3}
@@ -150,6 +151,62 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.35}
   m_EdgeRadius: 0
+--- !u!50 &2409104616825326166
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951129524470562622}
+  m_BodyType: 2
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8943227814932158429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951129524470562622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f82474dd90fe574cbdb11d73f94f706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 10
+  isInvincible: 0
+  healthBar: {fileID: 0}
+  hitInvincibilityDurationSeconds: 1
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6666474660222365857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2951129524470562622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbe62001d590d644aaea67c21cbd74f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackMultiplier: 0
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2951129524603419173
 GameObject:
   m_ObjectHideFlags: 0

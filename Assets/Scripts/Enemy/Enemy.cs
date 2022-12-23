@@ -1,20 +1,25 @@
 using UnityEngine;
 using System.Collections;
 
+
+[RequireComponent(typeof(ContactDamageController))]
+[RequireComponent(typeof(HPController))]
 public abstract class Enemy : MonoBehaviour {
 
-	public float life = 10;
 	public float speed = 3f;
 	public float collisionAttackPower = 15f;
 	public EnemyState state {get; private set;} = EnemyState.Waiting;
 	[SerializeField] protected bool isInvincible = false;
 
-
-	void Update()
+	private ContactDamageController contactDamageController;
+	private HPController hpController;
+	
+	void Awake()
 	{
-		if (life <= 0) {
-			Die();
-		}
+		contactDamageController = GetComponent<ContactDamageController>();
+
+		hpController = GetComponent<HPController>();
+		hpController.DeathEvent.AddListener(Die);
 	}
 
 
@@ -24,33 +29,11 @@ public abstract class Enemy : MonoBehaviour {
     }
 
 
-	public void GetHit(float damage, Vector3 hitPosition)
-	{
-		Debug.Log("Enemy hit");
-		Debug.Log(gameObject);
-		if (!isInvincible)
-		{
-			ApplyDamage(damage);
-			Knockback(hitPosition, 600f);
-		}
-	}
-
-
-	public void ApplyDamage(float damage)
-	{
-		life -= damage;
-		StartCoroutine(HitTime());
-	}
-
-
-	public abstract void Knockback(Vector3 hitPosition, float knockbackMultiplier);
-
-
 	void OnCollisionStay2D(Collision2D collision)
 	{
-		if (collision.gameObject.tag == "Player" && life > 0)
+		if (collision.gameObject.tag == "Player" && state != EnemyState.Dead)
 		{
-			collision.gameObject.GetComponent<CharacterController2D>().GetHit(collisionAttackPower, transform.position);
+			collision.gameObject.GetComponent<ContactDamageController>().GetHit(collisionAttackPower, transform.position);
 		}
 	}
 
@@ -60,15 +43,6 @@ public abstract class Enemy : MonoBehaviour {
 		SetState(EnemyState.Dead);
 		StartCoroutine(DestroyEnemy());
 	}
-
-
-	IEnumerator HitTime()
-	{
-		isInvincible = true;
-		yield return new WaitForSeconds(0.1f);
-		isInvincible = false;
-	}
-
 
 	public abstract IEnumerator DestroyEnemy();
 }

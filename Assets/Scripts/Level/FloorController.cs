@@ -8,9 +8,7 @@ public class FloorController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            Debug.Log("here");
-            Debug.Log(col.gameObject);
-            col.gameObject.GetComponent<CharacterController2D>().ApplyDamage(99999);
+            col.gameObject.GetComponent<HPController>().ChangeLifeByAmount(-99999);
         }
     }
 }

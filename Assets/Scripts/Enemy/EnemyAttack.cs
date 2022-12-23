@@ -45,7 +45,7 @@ public class EnemyAttack : MonoBehaviour
         GameObject playerOnAttackPoint = CheckPlayerOnAttackPoint();
         if (playerOnAttackPoint != null)
         {
-            playerOnAttackPoint.GetComponent<CharacterSubController>().parentController.GetHit(attackPower, transform.position);
+            playerOnAttackPoint.GetComponent<CharacterSubController>().parentController.contactDamageController.GetHit(attackPower, transform.position);
         }
     }
 
