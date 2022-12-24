@@ -20,17 +20,16 @@ public class EnemyProjectile : MonoBehaviour
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D(Collider2D col)
 	{
-		Debug.Log("enemy projectile collide");
-		if (collision.gameObject.CompareTag("Player"))
+		if (col.gameObject.CompareTag("Player"))
 		{
-			GameObject player = collision.gameObject;
+			GameObject player = col.gameObject;
 
-			player.GetComponent<ContactDamageController>().GetHit(dmgValue, transform.position);
+			player.GetComponent<CharacterSubController>().parentController.contactDamageController.GetHit(dmgValue, transform.position);
 			Destroy(gameObject);
 		}
-		else if (!collision.gameObject.CompareTag("Enemy"))
+		else if (!col.gameObject.CompareTag("Enemy"))
 		{
 			Destroy(gameObject);
 		}

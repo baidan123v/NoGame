@@ -102,7 +102,7 @@ public class HelicopterController : MonoBehaviour
 
         GameObject bullet = GameObject.Instantiate(projectilePrefab, startPosition, Quaternion.Euler(0, 0, 0));
         EnemyProjectile bulletController = bullet.GetComponent<EnemyProjectile>();
-        bulletController.direction = player.transform.position - attackPoint.transform.position;
+        bulletController.direction = direction;
         bulletController.StartMovement();
     }
 

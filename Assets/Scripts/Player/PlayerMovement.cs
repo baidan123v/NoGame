@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			rb2d.velocity = new Vector2(speedX, 0);
 
-			controller.currentAnimator.SetTrigger("Roll");
+			controller.currentAnimator.SetBool("IsRolling", true);
 		}
 	}
 
@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void OnRollEnd()
 	{
 		SetState(PlayerMovementState.OnGround);
+		controller.currentAnimator.SetBool("IsRolling", false);
 	}
 
 
